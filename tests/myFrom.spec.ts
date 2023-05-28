@@ -1,14 +1,8 @@
-import {Observable} from 'rxjs';
+import {myFrom} from '../src/myFrom';
 
 describe('myFrom', () => {
     it('myFrom should return value when subscribe', function () {
-        const source$ = new Observable<number>(subscriber => {
-            subscriber.next(1);
-            subscriber.next(2);
-            subscriber.next(3);
-            subscriber.next(4);
-            subscriber.next(5);
-        });
+        const source$ = myFrom();
 
         const expected = [1, 2, 3, 4, 5];
         const actual: number[] = [];
