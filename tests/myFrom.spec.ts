@@ -11,4 +11,15 @@ describe('myFrom', () => {
         });
         expect(actual).toEqual(expected);
     });
+
+    it('myFrom should support generic type', function () {
+        const source$ = myFrom(['a', 'b', 'c']);
+
+        const expected = ['a', 'b', 'c'];
+        const actual: string[] = [];
+        source$.subscribe(value => {
+            actual.push(value);
+        });
+        expect(actual).toEqual(expected);
+    });
 });

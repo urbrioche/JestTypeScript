@@ -1,7 +1,7 @@
 import {Observable} from 'rxjs';
 
-export function myFrom(data: number[]) {
-    return new Observable<number>(subscriber => {
+export function myFrom<TData>(data: TData[]) {
+    return new Observable<TData>(subscriber => {
         for (const value of data) {
             subscriber.next(value);
         }
