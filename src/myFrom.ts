@@ -1,12 +1,11 @@
 import {Observable} from 'rxjs';
 
 export function myFrom() {
+    const data = [1, 2, 3, 4, 5];
     const source$ = new Observable<number>(subscriber => {
-        subscriber.next(1);
-        subscriber.next(2);
-        subscriber.next(3);
-        subscriber.next(4);
-        subscriber.next(5);
+        for (const value of data) {
+            subscriber.next(value);
+        }
     });
     return source$;
 }
