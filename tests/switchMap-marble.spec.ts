@@ -48,6 +48,24 @@ describe('switchMap', () => {
             });
         });
     });
+
+    it('cold observable switchMap cold observable-marble-2', () => {
+        testScheduler.run(helpers => {
+            const {cold, hot, expectObservable, expectSubscriptions} = helpers;
+            const num: string = '   123|';
+            const people: string = 'ab|';
+            const data$ = cold(num);
+            const people$ = cold(people, {a: 'Iron Man', b: 'Captain America'});
+            const result = data$.pipe(
+                switchMap((no) => people$.pipe(map((person) => `${no}:${person}`)))
+            );
+            expectObservable(result).toBe('uwyz|', {
+                u: '1:Iron Man', v: '1:Captain America',
+                w: '2:Iron Man', x: '2:Captain America',
+                y: '3:Iron Man', z: '3:Captain America',
+            });
+        });
+    });
     //
     // it('cold observable switchMap async cold observable', done => {
     //     const expected: string[] = [];
