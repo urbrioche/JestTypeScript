@@ -2,7 +2,7 @@ import {map, Observable, Subject, switchMap, tap} from 'rxjs';
 
 describe('switchMap', () => {
     it('cold observable switchMap hot observable', () => {
-        const expected: string[] = [];
+        const actual: string[] = [];
         const data$ = new Observable<number>((subscriber) => {
             subscriber.next(1);
             subscriber.next(2);
@@ -19,19 +19,19 @@ describe('switchMap', () => {
         ).subscribe({
             next: (person) => {
                 // console.log(`coldObservableSwitchMapHotObservable: ${person}`);
-                expected.push(person);
+                actual.push(person);
             }
         });
 
         people$.next('Iron Man');
         people$.next('Captain America');
 
-        const actual = ['3:Iron Man', '3:Captain America'];
+        const expected = ['3:Iron Man', '3:Captain America'];
         expect(actual).toEqual(expected);
     });
 
     it('cold observable switchMap cold observable', () => {
-        const expected: string[] = [];
+        const actual: string[] = [];
         const data$ = new Observable<number>((subscriber) => {
             subscriber.next(1);
             subscriber.next(2);
@@ -50,11 +50,11 @@ describe('switchMap', () => {
         ).subscribe({
             next: (person) => {
                 // console.log(`coldObservableSwitchMapColdObservable: ${person}`);
-                expected.push(person);
+                actual.push(person);
             }
         });
 
-        const actual = [
+        const expected = [
             '1:Iron Man', '1:Captain America',
             '2:Iron Man', '2:Captain America',
             '3:Iron Man', '3:Captain America',
@@ -63,7 +63,7 @@ describe('switchMap', () => {
     });
 
     it('cold observable switchMap async cold observable', done => {
-        const expected: string[] = [];
+        const actual: string[] = [];
         const data$ = new Observable<number>((subscriber) => {
             subscriber.next(1);
             subscriber.next(2);
@@ -93,11 +93,11 @@ describe('switchMap', () => {
         ).subscribe({
             next: (person) => {
                 // console.log(`coldObservableSwitchMapAsyncColdObservable: ${person}`);
-                expected.push(person);
+                actual.push(person);
             },
             complete: () => {
                 //done();
-                const actual: string[] = [
+                const expected: string[] = [
                     '3:Iron Man',
                     '3:Captain America',
                 ];
